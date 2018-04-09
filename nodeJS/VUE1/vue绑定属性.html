@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script  src="vue.js"></script>
+    <style>
+        .active{
+            background: red;
+        }
+        .active1{
+            background: yellow;
+        }
+        .aaaa{
+            font-size: 30px;
+            color: yellow;
+        }
+    </style>
+<body>
+<!--v-bing:  他是用来绑定属性的 class style src href ...  简写 : -->
+<!--绑定class 类型-->
+<div id="app">
+    <!--<img :src="src" alt="">-->
+    <!--<p :class="c2">呵呵11111111111111111</p>  直接去查找style 里面的class-->
+    <!--<p :class="'active'"></p>   通过解析数据  获取相应的class-->
+
+    <!--灵活添加和删除 class jq addclass removeclass toggleclass-->
+    <!--通过改变数据来进行添加和删除class-->
+
+    <!--<p :class="{'active':isactive,'active1':isactive1}">111111</p>-->
+    <!--<p :class=[c3,{'active':isactive}]>12121212</p>-->
+    <!--<button @click="a">按钮</button>-->
+    <p :style="{'color':'red','font-size':'100px'}">1111111</p>   class
+    <p :style="styles">11111111111</p>                       style
+    <input type="text" :value="val">   value
+    <a :href="href1">百度</a>    href
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            src:"https://img.alicdn.com/tfs/TB1Q5nwbuuSBuNjy1XcXXcYjFXa-1190-90.jpg",
+            c1:"active",
+            c2:"active1",
+            isactive:true,
+            isactive1:false,
+            c3:"aaaa",
+            styles:{
+                color:'red',
+                fontSize:50+"px",
+                background:"yellow"
+            },
+            val:"呵呵呵",
+            href1:"https://www.baidu.com"
+        },
+        methods:{
+            a(){
+                //this 指的是Vue的实例
+                this.isactive=!this.isactive
+                this.isactive1=!this.isactive1
+            }
+        }
+    })
+</script>
+</html>

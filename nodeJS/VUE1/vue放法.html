@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!--根节点 vue的起始点vue-cli vue的角手架工具·-->
+    <!--v-on就是来触发我们methods里面的函数 简写@-->
+    <div id="app">
+        <p v-on:click="clicks(22222)">姓名：{{name}}</p>
+        <p @click="gxk456">性别：{{sex==1?"男":"女"}}</p>
+        <p @mouseover="moues" @mouseout="mouet">年龄：{{age<=18?"未成年人"+age:"成年人"+age}}</p>
+        <p>qq:{{qq+qname}}</p>
+        <input type="text" @keydown.enter="entr">
+    </div>
+</body>
+<script>
+    //初始化vue对象    new Vue({
+//        挂载点  element 元素
+        el:"#app",
+//        挂载数据  data  对应的结构是种json
+//        如果想要在页面中显示初始的数据就要用插值表达式{{}}来解析初始的数据
+        data:{
+            name:"gxk",
+            sex:"1",
+            age:"19",
+            qq:"2318696087",
+            qname:"呵呵"
+        },
+        //vue 实例里面的放法methods
+        methods:{
+            clicks:function (A) {
+                console.log(A)
+            },
+            //es6的语法关于函数的扩展
+            gxk456(){
+                alert("heheh")
+            },
+            moues(){
+                console.log("滚开")
+            },
+            mouet(){
+                console.log("回来")
+            },
+            //对于键盘事件要进行区分
+            //keydown  到底是按下键盘上的那个键
+            //修饰符
+            entr(){
+                console.log("按下了")
+            }
+
+        }
+    });
+
+</script>
+</html>

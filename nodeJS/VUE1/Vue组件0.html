@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        .a{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<!--vue的组件 component 一些可重复利用的HTML代码
+一个文件就是一个模块 模块里面包含很多组件-->
+<!--组件   全局组件(组件名称，配置参数Json)   （写在Vue实例前面）   私有组件
+组件里面的数据都是用函数来表示 data(){}-->
+<!--父组件 子组件-->
+<!--父传子  父级中的数据传递到子级 绑定自定义属性然后通过 props进行接收-->
+<div id="app">
+    <my-component :abc="arr"></my-component>
+</div>
+<!--html5里面提供了新的标签 template-->
+<template id="tem">
+    <div>
+        <ul>
+            <li v-for="item in arr1">{{item}}</li>
+        </ul>
+    </div>
+</template>
+</body>
+<script>
+    Vue.component("myComponent",{
+        //模版 template
+        //接收自定义数据
+        props:["abc"],
+        template:"#tem",
+        data(){
+            return {
+//                arr:[1,2,3,4,5,6,7,8,9]
+                arr1:this.abc
+            }
+
+        }
+
+
+
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            arr:[1,2,3,4,5,6,7,8,9,20]
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--显示隐藏 jq:show() hidd() toggle()-->
+<!--vue:通过更改数据来进行显示隐藏-->
+<!--指令：v-on v-bing v-model v-html v-text-->
+<!--v-if/v-show 对应的值是布尔值-->
+<!--true代表显示 false 隐藏-->
+<!--v-show通过控制CSS  display来控制的-->
+<!--v-if通过DOM元素   删除和创建元素控制的-->
+<div id="app">
+    <div v-if="onoff">很多很多文字</div>
+    <div v-else>呵呵呵呵呵呵呵</div>
+    <button @click="Visible">显示/隐藏</button>
+</div>
+
+
+</body>
+<script>
+    new Vue({
+        el:"#app",
+       data:{
+            onoff:true
+       },
+        methods:{
+            Visible(){
+                this.onoff=!this.onoff
+            }
+        }
+    })
+</script>
+</html>

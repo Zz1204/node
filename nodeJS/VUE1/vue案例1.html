@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        td {
+            text-align: center;
+        }
+        .bgc{
+            background: red;
+        }
+        .bgd{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+   <p>姓名：<input type="text" v-model="arr1.name"></p>
+  <p>年龄：<input type="text" v-model="arr1.age"></p>
+   <p>性别： <select name="" id="" v-model="arr1.sex">
+        <option>男</option>
+        <option>女</option>
+    </select>
+    <button @click="hehe">清空</button>
+    <button @click="adda">添加</button>
+   </p>
+   <table width="400px" border="1px"  cellpadding="0" cellspacing="0">
+
+           <tr>
+               <th>性名</th>
+               <th>年龄</th>
+               <th>性别</th>
+               <th>操作</th>
+           </tr>
+               <tr v-for="item,index in arr" :class="index%2==0?'bgc':'bgd'">
+                   <td>{{item.name}}</td>
+                   <td>{{item.age}}</td>
+                   <td>{{item.sex}}</td>
+                   <td><button @click="visi(index)">删除</button></td>
+               </tr>
+   </table>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+           arr:[
+               {name:"gxk",age:20,sex:"男"},
+               {name:"zh",age:250,sex:"女"},
+               {name:"gmm",age:19,sex:"女"}
+           ],
+            arr1:{
+                name:"",
+                age:"",
+                sex:"男"
+            },
+            vis:true
+
+        },
+             methods:{
+                adda(){
+                    this.arr.push(this.arr1);
+                    this.arr1={
+                        name:"",
+                        age:"",
+                        sex:"男"
+                    }
+                },
+                 visi(index){
+                     this.arr.splice(index,1)
+                 },
+                 hehe(){
+                     this.arr1={
+                         name:"",
+                         age:"",55575，
+                         sex:"男"
+                     }
+                 }
+        }
+    })
+</script>
+</html>

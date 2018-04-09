@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--循环遍历
+v-for 循环遍历数据-->
+<!--item in arr  item代表数据每一项-->
+<div id="app">
+    <!--遍历数组-->
+    <!--<ul>-->
+        <!--<li v-for="(item,index) in arr">-->
+            <!--<p>姓名：{{item.name}}</p>-->
+            <!--<p>年龄：{{item.age}}</p>-->
+            <!--<p>性别：{{item.sex}}</p>-->
+            <!--<p>下标：{{index}}</p>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--遍历json-->
+    <div v-for="(value,key,index) in datas">{{key}} : {{value}}  {{index}}</div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            arr:[
+                {name:"gxk0",age:20,sex:"男"},
+                {name:"zh",age:21,sex:"女"},
+                {name:"zh",age:22,sex:"女"},
+                {name:"gxk3",age:23,sex:"男"},
+                {name:"gxk4",age:24,sex:"男"}
+            ],
+            datas:{
+                username:'张三',
+                pass:123456,
+                phone:123456789,
+                sex:"男"
+
+            }
+
+        }
+    })
+</script>
+</html>

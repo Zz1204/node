@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        .bg{
+            width: 300px;
+            height: 200px;
+            background: red;
+        }
+        .bg1{
+            width: 500px;
+            height: 200px;
+            background:yellow;
+        }
+
+    </style>
+</head>
+<body>
+<!--父传子-->
+<!--<div id="app">-->
+    <!--<syx :abc="arr"/>-->
+<!--</div>-->
+
+
+
+<!--子传父-->
+<!--<div id="app1">-->
+    <!--<div :class="[{'bg':iscss},{'bg1':iscss1}]">我是父级里面的结构一会子级更改我的样式</div>-->
+    <!--<syx1 @abc="nba"></syx1>-->
+<!--</div>-->
+
+
+<!--同级相传-->
+<div id="app2">
+    <mycom></mycom>
+    <mycom1></mycom1>
+</div>
+
+
+<!--父传子-->
+<template id="tem">
+    <div>
+        <ul>
+            <li v-for="item in arr1">{{item}}</li>
+
+        </ul>
+    </div>
+</template>
+<!--子传父-->
+<template id="style1">
+    <div>
+       <button @click="change">改变父组件CSS</button>
+    </div>
+</template>
+<!--同级相传-->
+<template id="temm">
+    <div>
+        <p>{{num}}</p>
+        <button @click="chenge">++</button>
+    </div>
+</template>
+<template id="temm1">
+    <div>
+        <p>{{num1}}</p>
+        <button  @click="chenge1">++</button>
+    </div>
+</template>
+</body>
+<script>
+    //组件：是一段重复使用的html组件
+    //父传子  数据都是由函数表示 data(){}  绑定自定义属性v-bind 简写 “:” 通过props接收以数组形式可以接受多个
+//    Vue.component("syx",{
+//        //模版
+//        template:"#tem",
+//        //接收父组件数据
+//        props:["abc"],
+//        //数据
+//        data(){
+//            return{
+//                //this 指的是syx组件下面的abc属性
+//                arr1:this.abc
+//            }
+//        }
+//    })
+//    new Vue({
+//        el:"#app",
+//        data:{
+//            arr:["hehe","ehhe","hahah","jajd"]
+//        }
+//
+//    })
+//
+    //子传父 通过自定义事件进行传递   @
+    //首先触发子组件里面的数据函数 $emit  在通过子组件触发父组级数据函数 自定义一定要在子组件的标签上
+
+
+//    Vue.component("syx1",{
+//        template:"#style1",
+//        methods:{
+//            change(){
+//                this.$emit("abc")
+//            }
+//        }
+//
+//    })
+//    new Vue({
+//        el:"#app1",
+//        data:{
+//            iscss1:true,
+//            iscss:false
+//        },
+//        methods:{
+//            nba(){
+//                this.iscss1=!this.iscss1
+//                this.iscss=!this.iscss
+//            }
+//
+//        }
+//    })
+
+    //兄弟组件传递
+    //通过新Vue实例实现传递 通过新创建的Vue实例进行事件的监听
+    //首先触发自定义的事件 需要被新创建的Vue实例进行监听 $on
+    var connect=new Vue()
+    Vue.component("mycom",{
+        template:"#temm",
+        data(){
+            return{
+                num:10
+            }
+
+        },
+        methods:{
+            chenge(){
+                connect.$emit("abc",this.num)
+            }
+
+        },
+        mounted(){
+            connect.$on("aaa",()=>{
+                this.num++
+            })
+        }
+
+    })
+    Vue.component("mycom1",{
+        template:"#temm1",
+        data(){
+           return{
+               num1:20
+           }
+        },
+        methods:{
+            chenge1(){
+                connect.$emit("aaa")
+            }
+
+        },
+        mounted(){
+            //监听上面组件触发的事件
+            //es6 语法中 ()=>{}箭头函数 this不会更改
+            connect.$on("abc",(data)=>{
+                this.num1+=data
+            })
+        }
+    })
+
+
+    new  Vue({
+        el:"#app2",
+    })
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

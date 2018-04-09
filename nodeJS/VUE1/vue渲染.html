@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--1.渲染数据的第一种放法{{}}-->
+        <!--插值表达式{{}}他里面可以写js的表达式-->
+        <!--{{msg}}-->
+        <!--指令 都是以V-开头的-->
+        <!--angualr 都是以ng-开头-->
+        <!--1.渲染数据的第二种放法v-text v-html-->
+        <!--v-text 渲染文本数据-->
+        <!--v-html 渲染带有标签的数据  （可以进行解析标签）-->
+        <div v-text="text"></div>
+        <div v-html="text"></div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"郭锡坤",
+            text:"<h2>我是渲染的数据</h2>"
+        }
+
+    })
+</script>
+</html>

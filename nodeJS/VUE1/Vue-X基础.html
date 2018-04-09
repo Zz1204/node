@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+</head>
+<body>
+    <!--vuex ：状态管理工具=>(数据)-->
+    <!--1.使用vuex创建vuex对象  -->
+    <!--创建vuex对象 store()（仓库）-->
+    <!--状态管理工具 state 存放的数据（初始数据）-->
+<div id="app">{{num}}
+    <button @click="add">点赞</button>
+</div>
+</body>
+<script>
+    //创建Vuex对象
+    var store=new Vuex.Store({
+        //状态管理工具 state 存放的数据（初始数据）
+        state:{
+            num:10
+        },
+        mutations:{
+            chenge(state,data){
+                state.num+=data;
+            }
+        }
+
+//如果想要改变state里面的数据，那么必须mutations改变数据(改变state唯一的途径)
+    })
+    new Vue({
+        el:"#app",
+        //引入的数据   es6语法 key:value 如果key值value值相同可以简写 key
+        store,
+        data:{
+
+        },
+        computed:{
+            num(){
+                  return this.$store.state.num;
+            }
+
+        },
+        methods:{
+            add(){
+                this.$store.commit("chenge",1000);
+            }
+        }
+
+
+
+    })
+</script>
+</html>

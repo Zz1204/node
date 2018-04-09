@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+            list-style: none;
+        }
+        ul{
+            width: 800px;
+            margin:100px auto;
+            overflow: hidden;
+        }
+        ul li{
+            width: 190px;
+            margin-right: 10px;
+            float: left;
+        }
+        ul li img{
+            width: 190px;
+        }
+        ul li p{
+            margin: 10px 0;
+            font-size: 14px;
+            color: #ccc;
+
+        }
+        ul li h6{
+            margin-bottom: 10px;
+        }
+        ul li button{
+            width: 100px;
+            margin: 0 auto;
+            height: 30px;
+            background: red;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+<ul>
+    <!--<li>-->
+        <!--<img src="./img/1.jpg" alt="">-->
+        <!--<p>四川攀枝花火龙果</p>-->
+        <!--<h6>活动价：<span>138</span></h6>-->
+        <!--<button>立即购买</button>-->
+    <!--</li>-->
+
+
+
+
+</ul>
+</body>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+    $.ajax({
+        type:"get",
+        url:"/shopping",
+        success:function (data) {
+            data.forEach(function (item,index) {
+                var $li=$("<li></li>")
+                var $img=$("<img src=./img/"+item.src+">")
+                var $p=$("<p>"+item.text+"</p>")
+                var $h6=$("<h6>活动价格：</h6>");
+                var $span=$("<span></span>")
+                $span.appendTo($h6)
+                $span.html(item.prie)
+                var $button=$("<button>立即购买</button>")
+                $li.append($img,$p,$h6,$button)
+                $li.appendTo($("ul"))
+            })
+        }
+    })
+</script>
+</html>

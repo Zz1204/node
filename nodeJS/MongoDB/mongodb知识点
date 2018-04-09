@@ -1,0 +1,61 @@
+
+mongodb  启动 ：  net start  mongodb
+    停止   net stop  mongodb
+  注意：   你只要开启了mongodb  ，他就一直运行着，（启动一次就可以了）
+
+1.   如何mongodb的客户端  ：  mongo
+启动cmd   时  用管理员的身份进入
+2.  mongodb区别于mysql
+    mysql  关系类型的数据库   数据库->数据表->  行列
+    mongodb  非关系类型的数据库
+     数据库->集合->(bson) {}   大量的类似于json格式
+
+3.  学习指令
+    查看  mongdb 数据库   show  dbs  （ databases）
+    创建/使用   use 数据库名称
+     刚开始的时候  里面没有内容  用 show dbs  查看就查看不到
+     如果想要查看到  就要 从这下面创建集合
+
+ 创建集合    db.createCollection('集合名称')
+   就会显示刚才你新创建的数据库
+    驼峰命名  css： font-size   JS  :  fontSize
+
+    查看当前你使用的是那个数据库 ：  db
+    删除数据库  ：  db.dropDatabase()
+
+
+对于集合的操作
+    创建集合   db.createCollection('集合名称')
+    数据库下面可以有多个集合
+    查看数据库中的集合   show tables/collections
+    删除集合   db.集合名称.drop()
+
+
+    ***** AAAAA
+      增：db.集合名称.insert({key:value})
+        假设我们没有创建集合   db.ten.insert({name:"syx"})
+        "_id" : ObjectId("5a97604d8fc226a7f0756a8f") 表示插入这条数据的（身份证）
+      删：
+         全部删除  ：db.集合名称.remove({})
+      改：db.集合名称.update({条件},{修改内容(修改器进行修改),true,true})
+            第三个参数和第四个参数  默认是fasle
+            第三个参数   true    条件没有找到   执行添加操作
+            第四个参数   true    如果条件匹配多个的话 ,  就会进行批量修改
+       查：db.集合名称.find()
+      格式化： db.集合名称.find().pretty()
+
+
+      带符号的查询    db.集合名称.find();   查看集合下面所有的数据
+      条件查询   db.集合名称.find({key:value})
+
+
+      小于为$lt;
+      大于$gt;
+      不等于$ne ;
+      小于或等于 $lte;
+      大于或等于：$gte;
+
+
+ 1       i*5-4  -----  i*5     1---5
+ 2        6 --- 10
+ 3       11-15

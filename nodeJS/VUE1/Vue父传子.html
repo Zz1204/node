@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <gxk :abc="arr"></gxk>
+</div>
+
+<template id="tem">
+    <div>
+        <h1>我是tem父组件</h1>
+        <gxk1 :nba="abc"></gxk1>
+    </div>
+</template>
+<template id="tem1">
+    <div>
+       <ul>
+           <li v-for="item in arr2">{{item}}</li>
+       </ul>
+
+    </div>
+</template>
+</body>
+<script>
+    Vue.component("gxk",{
+        props:["abc"],
+        template:"#tem"
+
+    })
+    Vue.component("gxk1",{
+        props:["nba"],
+        template:"#tem1",
+        data(){
+            return{
+                arr2:this.nba
+            }
+        }
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            arr:["gxk","18","男","游戏"]
+        }
+    })
+</script>
+</html>

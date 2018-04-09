@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+            .header{
+                width: 1000px;
+                margin: 0px auto 100px;
+            }
+            .header .box{
+                width: 1000px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 26px;
+                margin: 50px 0;
+                border: 2px solid #ccc;
+                border-radius:4px;
+            }
+            .header button{
+                width: 200px;
+                height: 50px;
+                background: #00FFFF;
+                float: right;
+                font-size: 18px;
+            }
+            .div1{
+                margin: 0px auto ;
+                width: 1000px;
+            }
+        .div1 ul{
+            overflow: hidden;
+        }
+            .div1 ul li{
+                width: 1000px;
+                border-bottom: 2px solid red;
+                line-height: 50px;
+                float: left;
+            }
+            .div1 ul li .span1{
+                float: right;
+                font-size: 20px;
+                color: red;
+            }
+        .div1 ul .ded{
+            width: 200px;
+            height: 50px;
+            float: right;
+            margin-top: 50px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <gxk></gxk>
+    <gxk1></gxk1>
+</div>
+</body>
+<template id="tem">
+    <div class="header">
+        <input type="text" class="box" v-model="arr1">
+        <button @click="add">添加</button>
+    </div>
+</template>
+<template id="tem1">
+    <div class="div1">
+        <ul>
+
+            <li v-for="item,index in num"><input type="checkbox" :value="index" v-model="cheak">{{item}}</li>
+            <input type="checkbox" value="全选" v-model="cheak1" style="margin-top: 50px" @click="alla">全选
+            <button class="ded" @click="chenge1">删除</button>
+
+        </ul>
+    </div>
+</template>
+<script>
+
+    var store=new Vuex.Store({
+        state:{
+            arr:["css","html","js","jq"],
+            arr2:[]
+        },
+        mutations:{
+            chenge(state,data){
+                state.arr.push(data);
+            },
+            chenge2(state,data){
+
+                for(var i=0;i<data.length;i++){
+                    var a=data[i]
+
+                   if(i==a){
+                       console.log(a)
+                   }else{
+                       state.arr2.push(state[i])
+                   }
+                }
+                state.arr=state.arr2
+                state.arr2=[]
+            }
+        }
+
+    })
+
+    Vue.component("gxk",{
+        template:"#tem",
+        data(){
+            return{
+                arr1:""
+            }
+        },
+        methods:{
+            add(){
+                this.$store.commit("chenge",this.arr1);
+               this.arr1=""
+            }
+        }
+    })
+    Vue.component("gxk1",{
+        template:"#tem1",
+        data(){
+            return{
+                cheak:[],
+                cheak1:false
+            }
+        },
+        computed:{
+            num(){
+                return this.$store.state.arr;
+            }
+
+        },
+        methods: {
+            chenge1(){
+                if (this.cheak.length <= 0) {
+                    alert("请选中要删除的选项")
+                } else {
+                    this.$store.commit("chenge2", this.cheak);
+                    this.cheak = [];
+                }
+            },
+            alla(){
+                if(this.cheak1==true){
+                    for(var i=0;i<this.num.length;i++){
+                        console.log(i)
+                        this.cheak.splice(0,0,i)
+                    }
+
+                }else{
+
+                        this.cheak.splice(0,this.num.length)
+
+
+                }
+//
+//
+//
+            }
+        }
+    })
+    new Vue({
+        el:"#app",
+        store
+    })
+</script>
+</html>

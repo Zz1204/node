@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+    <script src="Vuex案例库2.js"></script>
+    <style>
+        td {
+            text-align: center;
+        }
+        .bgc{
+            background: red;
+        }
+        .bgd{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <syx1></syx1>
+    <syx></syx>
+</div>
+<template id="tem">
+    <div>
+        <table width="400px" border="1px"  cellpadding="0" cellspacing="0">
+            <tr>
+                <th>性名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="item,index in arr" :class="index%2==0?'bgc':'bgd'">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.sex}}</td>
+                <td><button @click="visi(index)">删除</button></td>
+            </tr>
+        </table>
+    </div>
+</template>
+
+<template id="tem1">
+    <div>
+        <p>姓名：<input type="text" v-model="arr1.name"></p>
+        <p>年龄：<input type="text" v-model="arr1.age"></p>
+        <p>性别： <select name="" id="" v-model="arr1.sex">
+            <option>男</option>
+            <option>女</option>
+        </select>
+            <button @click="chenge">清空</button>
+            <button @click="add">添加</button>
+        </p>
+
+    </div>
+</template>
+</body>
+<script>
+    Vue.component("syx",{
+        template:"#tem",
+        computed:{
+            arr(){
+              return  this.$store.state.arr;
+            }
+        },
+        methods:{
+            visi(index){
+                this.$store.commit("visi",index)
+            }
+        }
+
+    })
+    Vue.component("syx1",{
+        template:"#tem1",
+        computed:{
+                arr1(){
+                    return this.$store.state.arr1
+                }
+        },
+        methods: {
+            add(){
+                this.$store.commit("add",this.arr1)
+            },
+            chenge(){
+
+                this.$store.commit("chenge")
+            }
+
+        }
+
+    })
+    new Vue({
+        el:"#app",
+        //注入库
+        store,
+    })
+</script>
+</html>

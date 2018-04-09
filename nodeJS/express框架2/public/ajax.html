@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>获取</button>
+<p class="p1"></p>
+<p class="p2"></p>
+</body>
+<script src="jquery-3.2.1.min.js" ></script>
+<script>
+    $("button").click(function () {
+        $.ajax({
+            type:"get",
+            url:"/ajax",
+            async:true,
+            success:function (data) {
+                $(".p1").html("账号："+data.username)
+                $(".p2").html("密码："+data.pass)
+
+            },
+            error:function (err) {
+                console.log(err)
+            }
+            })
+
+    })
+</script>
+</html>
